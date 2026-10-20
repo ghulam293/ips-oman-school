@@ -84,7 +84,7 @@ export default function LoginPage() {
           </div>
 
           {/* Stats */}
-          <div style={{ display: 'flex', gap: 32, marginBottom: 40 }}>
+          <div className="hide-on-mobile" style={{ display: 'flex', gap: 32, marginBottom: 40 }}>
             {[['1,250', 'Students'], ['68', 'Staff'], ['22+', 'Nations'], ['PG–12', 'Grades']].map(([v, l]) => (
               <div key={l} style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#fff' }}>{v}</div>
@@ -94,7 +94,7 @@ export default function LoginPage() {
           </div>
 
           {/* School photo placeholder */}
-          <div style={{
+          <div className="hide-on-mobile" style={{
             width: '100%', maxWidth: 340, height: 160, borderRadius: 14,
             background: 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))',
             border: '1px solid rgba(255,255,255,0.08)',

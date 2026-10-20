@@ -1,89 +1,89 @@
-﻿'use client'
+'use client'
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 interface User { name: string; role: string; avatar: string; email: string }
 
-// â”€â”€â”€ Complete 44-module navigation â”€â”€â”€
+// Complete 44-module navigation
 const NAV_SECTIONS = [
   {
     label: 'Main', items: [
-      { icon: 'âŠž', label: 'Dashboard',        href: '/dashboard/admin' },
+      { icon: '⊞', label: 'Dashboard', href: '/dashboard/admin' },
     ]
   },
   {
     label: 'Core Management', items: [
-      { icon: 'ðŸŽ“', label: 'Students',          href: '/dashboard/admin/students',      badge: 0 },
-      { icon: 'ðŸ“‹', label: 'Admissions',        href: '/dashboard/admin/admissions',    badge: 5 },
-      { icon: 'ðŸ’°', label: 'Fee Management',    href: '/dashboard/admin/fees' },
-      { icon: 'ðŸ’³', label: 'Payments',          href: '/dashboard/admin/payments' },
-      { icon: 'âœ…', label: 'Attendance',        href: '/dashboard/admin/attendance' },
-      { icon: 'ðŸ‘¨â€ðŸ’¼', label: 'Staff & Teachers',  href: '/dashboard/admin/staff' },
-      { icon: 'ðŸ§¾', label: 'Expenses',          href: '/dashboard/admin/expenses' },
-      { icon: 'ðŸ””', label: 'Notifications',     href: '/dashboard/admin/notifications' },
-      { icon: 'ðŸ“Š', label: 'Lead Management',   href: '/dashboard/admin/leads' },
-      { icon: 'ðŸ”„', label: 'Auto Debit',        href: '/dashboard/admin/auto-debit' },
-      { icon: 'ðŸ‘¥', label: 'User Management',   href: '/dashboard/admin/users' },
-      { icon: 'ðŸ§¸', label: 'Daycare Fees',      href: '/dashboard/admin/daycare' },
+      { icon: '🎓', label: 'Students',         href: '/dashboard/admin/students',   badge: 0 },
+      { icon: '📋', label: 'Admissions',       href: '/dashboard/admin/admissions', badge: 5 },
+      { icon: '💰', label: 'Fee Management',   href: '/dashboard/admin/fees' },
+      { icon: '💳', label: 'Payments',         href: '/dashboard/admin/payments' },
+      { icon: '✅', label: 'Attendance',       href: '/dashboard/admin/attendance' },
+      { icon: '👨‍💼', label: 'Staff & Teachers', href: '/dashboard/admin/staff' },
+      { icon: '🧾', label: 'Expenses',         href: '/dashboard/admin/expenses' },
+      { icon: '🔔', label: 'Notifications',    href: '/dashboard/admin/notifications' },
+      { icon: '📊', label: 'Lead Management',  href: '/dashboard/admin/leads' },
+      { icon: '🔄', label: 'Auto Debit',       href: '/dashboard/admin/auto-debit' },
+      { icon: '👥', label: 'User Management',  href: '/dashboard/admin/users' },
+      { icon: '🧸', label: 'Daycare Fees',     href: '/dashboard/admin/daycare' },
     ]
   },
   {
     label: 'HR & Payroll', items: [
-      { icon: 'ðŸ’µ', label: 'Salary & Payroll',  href: '/dashboard/admin/salary' },
-      { icon: 'ðŸ—“ï¸', label: 'Leave Management',  href: '/dashboard/admin/leave',          badge: 3 },
+      { icon: '💵', label: 'Salary & Payroll', href: '/dashboard/admin/salary' },
+      { icon: '🗓️', label: 'Leave Management', href: '/dashboard/admin/leave', badge: 3 },
     ]
   },
   {
     label: 'Academics', items: [
-      { icon: 'ðŸ“', label: 'Exams & Results',   href: '/dashboard/admin/exams' },
-      { icon: 'ðŸ“–', label: 'Homework',          href: '/dashboard/admin/homework' },
-      { icon: 'ðŸ“…', label: 'Timetable',         href: '/dashboard/admin/timetable' },
-      { icon: 'ðŸ’»', label: 'Online Classes',    href: '/dashboard/admin/online-classes' },
-      { icon: 'ðŸ“†', label: 'Academic Calendar', href: '/dashboard/admin/calendar' },
-      { icon: 'ðŸ“—', label: 'Library',           href: '/dashboard/admin/library' },
-      { icon: 'ðŸŽ¯', label: 'LMS',              href: '/dashboard/admin/lms' },
+      { icon: '📝', label: 'Exams & Results',  href: '/dashboard/admin/exams' },
+      { icon: '📖', label: 'Homework',         href: '/dashboard/admin/homework' },
+      { icon: '📅', label: 'Timetable',        href: '/dashboard/admin/timetable' },
+      { icon: '💻', label: 'Online Classes',   href: '/dashboard/admin/online-classes' },
+      { icon: '📆', label: 'Academic Calendar',href: '/dashboard/admin/calendar' },
+      { icon: '📗', label: 'Library',          href: '/dashboard/admin/library' },
+      { icon: '🎯', label: 'LMS',              href: '/dashboard/admin/lms' },
     ]
   },
   {
     label: 'Communication', items: [
-      { icon: 'ðŸ“£', label: 'Notice Board',      href: '/dashboard/admin/notices' },
-      { icon: 'ðŸ’¬', label: 'Feedback & Queries',href: '/dashboard/admin/feedback',       badge: 4 },
-      { icon: 'ðŸ‘¨â€ðŸ‘©â€ðŸ‘§', label: 'Guardians',         href: '/dashboard/admin/guardians' },
-      { icon: 'âœ‰ï¸', label: 'Messages',          href: '/dashboard/admin/messages' },
+      { icon: '📣', label: 'Notice Board',     href: '/dashboard/admin/notices' },
+      { icon: '💬', label: 'Feedback & Queries',href: '/dashboard/admin/feedback', badge: 4 },
+      { icon: '👨‍👩‍👧', label: 'Guardians',        href: '/dashboard/admin/guardians' },
+      { icon: '✉️', label: 'Messages',         href: '/dashboard/admin/messages' },
     ]
   },
   {
     label: 'Operations', items: [
-      { icon: 'ðŸšŒ', label: 'Transport',         href: '/dashboard/admin/transport' },
-      { icon: 'ðŸŽ«', label: 'Service Requests',  href: '/dashboard/admin/requests' },
-      { icon: 'ðŸ–¼ï¸', label: 'Photo Gallery',     href: '/dashboard/admin/gallery' },
-      { icon: 'ðŸ ', label: 'Hostel',            href: '/dashboard/admin/hostel' },
-      { icon: 'ðŸ“¦', label: 'Inventory',         href: '/dashboard/admin/inventory' },
-      { icon: 'ðŸ¢', label: 'Front Office',      href: '/dashboard/admin/front-office' },
-      { icon: 'ðŸ“‹', label: 'Daily Activities',  href: '/dashboard/admin/daily-activities' },
-      { icon: 'ðŸ“·', label: 'CCTV',             href: '/dashboard/admin/cctv' },
-      { icon: 'ðŸ«', label: 'Multi-Branch',      href: '/dashboard/admin/branches' },
-      { icon: 'ðŸ½ï¸', label: 'Canteen',          href: '/dashboard/admin/canteen' },
+      { icon: '🚌', label: 'Transport',        href: '/dashboard/admin/transport' },
+      { icon: '🎟️', label: 'Service Requests', href: '/dashboard/admin/requests' },
+      { icon: '🖼️', label: 'Photo Gallery',    href: '/dashboard/admin/gallery' },
+      { icon: '🏠', label: 'Hostel',           href: '/dashboard/admin/hostel' },
+      { icon: '📦', label: 'Inventory',        href: '/dashboard/admin/inventory' },
+      { icon: '🏢', label: 'Front Office',     href: '/dashboard/admin/front-office' },
+      { icon: '📋', label: 'Daily Activities', href: '/dashboard/admin/daily-activities' },
+      { icon: '📹', label: 'CCTV',             href: '/dashboard/admin/cctv' },
+      { icon: '🏫', label: 'Multi-Branch',     href: '/dashboard/admin/branches' },
+      { icon: '🍽️', label: 'Canteen',          href: '/dashboard/admin/canteen' },
     ]
   },
   {
     label: 'Intelligence', items: [
-      { icon: 'ðŸ¤–', label: 'AI Assistant',      href: '/dashboard/admin/ai-assistant' },
-      { icon: 'ðŸ“Š', label: 'Analytics',         href: '/dashboard/admin/analytics' },
+      { icon: '🤖', label: 'AI Assistant',     href: '/dashboard/admin/ai-assistant' },
+      { icon: '📊', label: 'Analytics',        href: '/dashboard/admin/analytics' },
     ]
   },
   {
     label: 'Customization', items: [
-      { icon: 'ðŸŽ¨', label: 'School Branding',   href: '/dashboard/admin/customization' },
-      { icon: 'ðŸ“„', label: 'Doc Templates',     href: '/dashboard/admin/templates' },
-      { icon: 'âš™ï¸', label: 'Settings',         href: '/dashboard/admin/settings' },
+      { icon: '🎨', label: 'School Branding',  href: '/dashboard/admin/customization' },
+      { icon: '📄', label: 'Doc Templates',    href: '/dashboard/admin/templates' },
+      { icon: '⚙️', label: 'Settings',         href: '/dashboard/admin/settings' },
     ]
   },
   {
     label: 'Compliance', items: [
-      { icon: 'ðŸ›¡ï¸', label: 'Compliance',        href: '/dashboard/admin/compliance' },
-      { icon: 'ðŸ”', label: 'Audit Logs',        href: '/dashboard/admin/audit' },
+      { icon: '🛡️', label: 'Compliance',       href: '/dashboard/admin/compliance' },
+      { icon: '🔍', label: 'Audit Logs',       href: '/dashboard/admin/audit' },
     ]
   },
 ]
@@ -100,7 +100,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router   = useRouter()
   const pathname = usePathname()
   const [user, setUser] = useState<User | null>(null)
-  const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [lang, setLang] = useState<'en'|'ar'>('en')
   const [academicYear] = useState('2026-2027')
@@ -110,6 +109,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (!s) { router.push('/login'); return }
     setUser(JSON.parse(s))
   }, [router])
+
+  // Close sidebar on route change
+  useEffect(() => {
+    setMobileOpen(false)
+  }, [pathname])
 
   if (!user) return (
     <div style={{ minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'var(--bg-page)' }}>
@@ -121,15 +125,28 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="app-shell" dir={lang==='ar' ? 'rtl' : 'ltr'} lang={lang}>
-      {/* â”€â”€â”€â”€ SIDEBAR â”€â”€â”€â”€ */}
+      {/* Mobile Drawer Overlay */}
+      <div
+        className={`sidebar-overlay${mobileOpen ? ' open' : ''}`}
+        onClick={() => setMobileOpen(false)}
+      />
+
+      {/* ──── SIDEBAR ──── */}
       <aside className={`sidebar${mobileOpen ? ' open' : ''}`}>
         {/* Logo */}
         <div className="sidebar-logo">
-          <div className="sidebar-logo-icon">ðŸ«</div>
-          <div>
+          <div className="sidebar-logo-icon">🏫</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <div className="sidebar-logo-name">IPS Oman</div>
             <div className="sidebar-logo-sub">Admin Portal</div>
           </div>
+          <button
+            onClick={() => setMobileOpen(false)}
+            className="sidebar-close-btn"
+            aria-label="Close sidebar"
+          >
+            ✕
+          </button>
         </div>
 
         {/* Nav */}
@@ -172,78 +189,73 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </div>
           </div>
           <button onClick={handleLogout} className="nav-item" style={{ width: '100%', background: 'none', border: 'none' }}>
-            <span className="nav-icon">ðŸšª</span>
+            <span className="nav-icon">🚪</span>
             <span>Sign Out</span>
           </button>
         </div>
       </aside>
 
-      {/* â”€â”€â”€â”€ MAIN â”€â”€â”€â”€ */}
+      {/* ──── MAIN ──── */}
       <div className="main-content">
         {/* Top bar */}
         <header className="topbar">
-          <button onClick={() => setMobileOpen(!mobileOpen)}
-            style={{ display: 'none', background: 'none', border: 'none', fontSize: '1.3rem', color: 'var(--text-muted)', cursor: 'pointer' }}
-            className="mobile-menu-btn">
-            â˜°
+          <button
+            onClick={() => setMobileOpen(o => !o)}
+            className="mobile-menu-btn"
+            aria-label="Toggle navigation menu"
+          >
+            ☰
           </button>
+
           {/* Search */}
           <div className="topbar-search">
-            <span style={{ color: 'var(--text-light)', fontSize: '0.9rem' }}>ðŸ”</span>
+            <span style={{ color: 'var(--text-light)', fontSize: '0.9rem' }}>🔍</span>
             <input placeholder="Search students, staff, etc..." />
           </div>
 
           <div className="topbar-actions">
             {/* Academic year */}
-            <div style={{
+            <div className="hide-mobile" style={{
               padding: '5px 12px', borderRadius: 'var(--radius-md)',
               background: 'var(--bg-light)', border: '1px solid var(--border)',
               fontSize: '0.78rem', fontWeight: 600, color: 'var(--text-muted)',
               display: 'flex', alignItems: 'center', gap: 5,
             }}>
-              ðŸ“… AY {academicYear}
+              📅 AY {academicYear}
             </div>
 
             {/* Lang toggle */}
             <button onClick={() => setLang(l => l === 'en' ? 'ar' : 'en')}
               className="topbar-icon-btn" title="Switch Language">
-              {lang === 'en' ? 'Ø¹Ø±' : 'EN'}
+              {lang === 'en' ? 'عر' : 'EN'}
             </button>
 
             {/* Notifications */}
-            <div className="topbar-icon-btn" style={{ position: 'relative' }}>
-              ðŸ””
+            <div className="topbar-icon-btn hide-mobile" style={{ position: 'relative' }}>
+              🔔
               <span className="notif-dot" />
             </div>
 
             {/* Messages */}
-            <div className="topbar-icon-btn">âœ‰ï¸</div>
+            <div className="topbar-icon-btn hide-mobile">✉️</div>
 
-            {/* User */}
-            <div className="user-pill">
+            {/* User pill */}
+            <div className="user-pill" onClick={handleLogout} title="Click to sign out">
               <div className="user-avatar">{user.avatar}</div>
-              <div>
-                <div className="user-pill-name">{user.name.split(' ')[0]} {user.name.split(' ')[1] || ''}</div>
-                <div className="user-pill-role">{ROLE_LABEL[user.role] || 'Admin'}</div>
+              <div style={{ lineHeight: 1.2 }}>
+                <div className="user-pill-name">{user.name.split(' ')[0]}</div>
+                <div className="user-pill-role">{ROLE_LABEL[user.role] || user.role}</div>
               </div>
-              <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem', marginLeft: 4 }}>â–¼</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.7rem' }}>▼</span>
             </div>
           </div>
         </header>
 
-        {/* Page */}
+        {/* Page body */}
         <main className="page-content animate-fadeinup">
           {children}
         </main>
       </div>
-
-      {/* Mobile overlay */}
-      {mobileOpen && (
-        <div onClick={() => setMobileOpen(false)}
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 150 }} />
-      )}
     </div>
   )
 }
-
-
