@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "name": "ips-oman-school-portal",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
