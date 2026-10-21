@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 interface User { name: string; role: string; avatar: string; email: string }
 
 const PORTAL_MAP: Record<string, { icon: string; name: string; desc: string; route: string; color: string }> = {
-  appointments: { icon:'📅', name:'School Appointments', desc:'10 Roles, meeting bookings, staff calendars & visitor check-in', route:'/appointments', color:'#0b2545' },
   admin:   { icon:'⚙️', name:'Admin Portal',   desc:'Manage school operations, staff, fees & reports', route:'/dashboard/admin',   color:'#cc1a1a' },
   teacher: { icon:'📚', name:'Teacher Portal',  desc:'Classes, attendance, exams & parent communication', route:'/dashboard/teacher', color:'#2563eb' },
   parent:  { icon:'👨‍👩‍👧', name:'Parent Portal',   desc:"Student progress, fees, results & messaging",       route:'/dashboard/parent',  color:'#059669' },
@@ -42,7 +41,7 @@ export default function SelectPortalPage() {
     if (!stored) { router.push('/login'); return }
     const u = JSON.parse(stored)
     setUser(u)
-    const portals = ['appointments', ...(ROLE_PORTAL[u.role] || ['admin'])]
+    const portals = ROLE_PORTAL[u.role] || ['admin']
     setAvailablePortals(portals)
     // Single portal → auto redirect
     if (portals.length === 1) {

@@ -140,35 +140,9 @@ export default function LoginPage() {
           <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--text-dark)', marginBottom: 4 }}>
             {isRtl ? 'أهلاً بعودتك' : 'Welcome Back'}
           </h2>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: 16 }}>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: 20 }}>
             {isRtl ? 'قم بتسجيل الدخول إلى بوابة المدرسة' : 'Login to your School Portal'}
           </p>
-
-          {/* Featured School Appointment App Demo Banner */}
-          <div style={{
-            marginBottom: 20, padding: '12px 14px', borderRadius: 12,
-            background: 'linear-gradient(135deg, #0b2545, #134074)',
-            border: '1.5px solid #c59b27', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            boxShadow: '0 4px 12px rgba(11,37,69,0.15)', cursor: 'pointer'
-          }} onClick={() => router.push('/appointments')}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ fontSize: '1.4rem' }}>📅</span>
-              <div style={{ textAlign: isRtl ? 'right' : 'left' }}>
-                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#fff' }}>
-                  {isRtl ? 'نظام المواعيد والمقابلات المدرسية' : 'School Appointment App Demo'}
-                </div>
-                <div style={{ fontSize: '0.72rem', color: '#cbd5e1' }}>
-                  {isRtl ? 'الأدوار الـ ١٠ • حجز • تقويم • استقبال الزوار' : 'All 10 Roles • Booking • Calendar • Visitor Desk'}
-                </div>
-              </div>
-            </div>
-            <span style={{
-              background: '#c59b27', color: '#0b2545', fontWeight: 800, fontSize: '0.72rem',
-              padding: '4px 10px', borderRadius: 8, whiteSpace: 'nowrap'
-            }}>
-              {isRtl ? 'فتح التطبيق ←' : 'Open App →'}
-            </span>
-          </div>
 
           {error && <div className="alert alert-danger" style={{ marginBottom: 14 }}>⚠️ {error}</div>}
 
