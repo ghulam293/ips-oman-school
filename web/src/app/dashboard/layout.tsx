@@ -10,6 +10,7 @@ const NAV_SECTIONS = [
   {
     label: 'Main', items: [
       { icon: '⊞', label: 'Dashboard', href: '/dashboard/admin' },
+      { icon: '📅', label: 'School Appointments', href: '/appointments', badge: 3 },
     ]
   },
   {
