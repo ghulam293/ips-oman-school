@@ -30,6 +30,7 @@ const NAV_SECTIONS = [
   },
   {
     label: 'HR & Payroll', items: [
+      { icon: '👔', label: 'HR Dashboard',     href: '/dashboard/hr' },
       { icon: '💵', label: 'Salary & Payroll', href: '/dashboard/admin/salary' },
       { icon: '🗓️', label: 'Leave Management', href: '/dashboard/admin/leave', badge: 3 },
     ]

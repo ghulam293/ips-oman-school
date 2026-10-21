@@ -47,11 +47,35 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(''); setLoading(true)
-    await new Promise(r => setTimeout(r, 700))
+    await new Promise(r => setTimeout(r, 600))
     const u = DEMO_USERS.find(u => u.email === email && u.password === password)
     if (!u) { setError('Invalid email or password. Please try again.'); setLoading(false); return }
     localStorage.setItem('ips_user', JSON.stringify({ name: u.name, role: u.role, avatar: u.avatar, email: u.email, portal: u.portal }))
-    router.push('/select-portal')
+
+    // Direct Role-Based Navigation: HR opens HR, Teacher opens Teacher, etc.
+    const ROLE_HOME_ROUTES: Record<string, string> = {
+      hr_officer:         '/dashboard/hr',
+      teacher:            '/dashboard/teacher',
+      coordinator:        '/dashboard/teacher',
+      parent:             '/dashboard/parent',
+      student:            '/dashboard/student',
+      principal:          '/dashboard/principal',
+      director:           '/dashboard/admin',
+      super_admin:        '/dashboard/admin',
+      branch_admin:       '/dashboard/admin',
+      accountant:         '/dashboard/admin/fees',
+      admission_officer:  '/dashboard/admin/admissions',
+      librarian:          '/dashboard/admin/library',
+      receptionist:       '/dashboard/receptionist',
+      canteen_manager:    '/dashboard/cafeteria',
+      nurse:              '/dashboard/nurse',
+      transport_manager:  '/dashboard/transport',
+      it_support:         '/dashboard/admin/settings',
+      security:           '/dashboard/security',
+    }
+
+    const targetRoute = ROLE_HOME_ROUTES[u.role] || (u.portal ? `/dashboard/${u.portal}` : '/dashboard/admin')
+    router.push(targetRoute)
   }
 
   const quickLogin = (u: typeof DEMO_USERS[0]) => { setEmail(u.email); setPassword(u.password) }
