@@ -135,7 +135,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className={`sidebar${mobileOpen ? ' open' : ''}`}>
         {/* Logo */}
         <div className="sidebar-logo">
-          <div className="sidebar-logo-icon">🏫</div>
+          <div style={{ width: 38, height: 38, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <img src="/ips-crest.png" alt="IPS Crest" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div className="sidebar-logo-name">IPS Oman</div>
             <div className="sidebar-logo-sub">Admin Portal</div>

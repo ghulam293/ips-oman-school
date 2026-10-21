@@ -61,15 +61,17 @@ export default function LoginPage() {
       {/* Left brand panel */}
       <div className="auth-brand-panel">
         <div style={{ zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-          {/* School crest */}
+          {/* Official School crest */}
           <div style={{
-            width: 88, height: 88, borderRadius: '50%',
-            background: 'linear-gradient(135deg, #cc1a1a, #991b1b)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '2.2rem', marginBottom: 20,
-            boxShadow: '0 4px 24px rgba(204,26,26,0.4)',
-            border: '3px solid rgba(255,255,255,0.15)',
-          }}>🏫</div>
+            width: 104, height: 104, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            marginBottom: 16, filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.4))'
+          }}>
+            <img
+              src="/ips-crest.png"
+              alt="International Pioneers School Crest"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+          </div>
           <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#fff', marginBottom: 4 }}>
             International Pioneers School
           </div>
@@ -118,12 +120,13 @@ export default function LoginPage() {
         <div className="auth-card animate-fadeinup">
           {/* Lang toggle */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div style={{
-                width: 28, height: 28, background: '#cc1a1a', borderRadius: 6,
-                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem',
-              }}>🏫</div>
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--text-dark)' }}>IPS Oman Portal</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <img
+                src="/ips-crest.png"
+                alt="IPS Logo"
+                style={{ width: 34, height: 34, objectFit: 'contain' }}
+              />
+              <span style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-dark)' }}>IPS Oman Portal</span>
             </div>
             <div style={{ display: 'flex', gap: 4 }}>
               {(['en', 'ar'] as const).map(l => (

@@ -19,7 +19,11 @@ export default function RootPage() {
       fontFamily: 'system-ui, sans-serif'
     }}>
       <div style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: '2.5rem', marginBottom: 12 }}>🏫</div>
+        <img
+          src="/ips-crest.png"
+          alt="International Pioneers School Crest"
+          style={{ width: 90, height: 90, objectFit: 'contain', marginBottom: 14, filter: 'drop-shadow(0 6px 16px rgba(0,0,0,0.12))' }}
+        />
         <div style={{ fontWeight: 800, fontSize: '1.25rem', marginBottom: 6 }}>International Pioneers School</div>
         <div style={{ fontSize: '0.85rem', color: '#64748b' }}>Opening School Operations Platform...</div>
       </div>

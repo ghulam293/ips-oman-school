@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   },
   description: 'International Pioneers School Oman — Secure management portal for staff, parents, and students.',
   keywords: ['IPS Oman', 'school portal', 'student management', 'International Pioneers School'],
+  icons: {
+    icon: '/ips-crest.png',
+    apple: '/ips-crest.png',
+  },
 }
 
 export const viewport: Viewport = {
@@ -24,6 +28,8 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr">
       <head>
+        <link rel="icon" href="/ips-crest.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/ips-crest.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

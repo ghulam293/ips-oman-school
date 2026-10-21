@@ -62,10 +62,15 @@ export default function SelectPortalPage() {
         {/* Logo */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: 28 }}>
           <div style={{
-            width: 60, height: 60, borderRadius: 14, background: '#cc1a1a',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '1.6rem', marginBottom: 12, boxShadow: '0 4px 16px rgba(204,26,26,0.3)',
-          }}>🏫</div>
+            width: 72, height: 72, marginBottom: 12,
+            filter: 'drop-shadow(0 4px 16px rgba(0,0,0,0.15))',
+          }}>
+            <img
+              src="/ips-crest.png"
+              alt="International Pioneers School Crest"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+          </div>
           <div style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-dark)' }}>
             INTERNATIONAL PIONEERS SCHOOL
           </div>

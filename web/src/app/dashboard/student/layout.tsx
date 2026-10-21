@@ -52,7 +52,9 @@ export default function StudentLayout({ children }: { children: React.ReactNode 
 
       <aside className={`sidebar${mobileOpen ? ' open' : ''}`}>
         <div className="sidebar-logo">
-          <div className="sidebar-logo-icon" style={{ background: PC }}>🎓</div>
+          <div style={{ width: 36, height: 36, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <img src="/ips-crest.png" alt="IPS Crest" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div className="sidebar-logo-name">IPS Oman</div>
             <div className="sidebar-logo-sub">Student Portal</div>
